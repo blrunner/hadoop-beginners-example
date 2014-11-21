@@ -9,22 +9,21 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-
 import wikibooks.hadoop.chapter05.DelayCountReducer;
 import wikibooks.hadoop.chapter05.DepartureDelayCountMapper;
 
 public class DepartureDelayCount {
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+  public static void main(String[] args) throws Exception {
+    Configuration conf = new Configuration();
 
     // 입출력 데이터 경로 확인
-		if (args.length != 2) {
-			System.err.println("Usage: DepartureDelayCount <input> <output>");
-			System.exit(2);
-		}
-		conf.set("mapred.job.queue.name", "queueA");
+    if (args.length != 2) {
+      System.err.println("Usage: DepartureDelayCount <input> <output>");
+      System.exit(2);
+    }
+    conf.set("mapred.job.queue.name", "queueA");
     // Job 이름 설정
-		Job job = new Job(conf, "DepartureDelayCount");
+    Job job = new Job(conf, "DepartureDelayCount");
 
     // 입출력 데이터 경로 설정
     FileInputFormat.addInputPath(job, new Path(args[0]));
@@ -46,5 +45,5 @@ public class DepartureDelayCount {
     job.setOutputValueClass(IntWritable.class);
 
     job.waitForCompletion(true);
-	}
+  }
 }
