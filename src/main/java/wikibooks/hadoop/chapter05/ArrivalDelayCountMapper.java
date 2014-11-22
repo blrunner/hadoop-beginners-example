@@ -4,6 +4,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import wikibooks.hadoop.common.AirlinePerformanceParser;
 
 import java.io.IOException;
 
@@ -18,22 +19,14 @@ public class ArrivalDelayCountMapper extends
   public void map(LongWritable key, Text value, Context context)
     throws IOException, InterruptedException {
 
-    // 콤마 구분자 분리
-    String[] colums = value.toString().split(",");
-    if (colums != null && colums.length > 0) {
-      try {
-        // 출력키 설정
-        outputKey.set(colums[0] + "," + colums[1]);
-        if (!colums[14].equals("NA")) {
-          int arrDelayTime = Integer.parseInt(colums[14]);
-          if (arrDelayTime > 0) {
-            // 출력 데이터 생성
-            context.write(outputKey, outputValue);
-          }
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    AirlinePerformanceParser parser = new AirlinePerformanceParser(value);
+
+    // 출력키 설정
+    outputKey.set(parser.getYear() + "," + parser.getMonth());
+
+    if (parser.getArriveDelayTime() > 0) {
+      // 출력 데이터 생성
+      context.write(outputKey, outputValue);
     }
   }
 }

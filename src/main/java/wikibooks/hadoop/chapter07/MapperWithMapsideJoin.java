@@ -5,14 +5,14 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import wikibooks.hadoop.common.AirlinePerformanceParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class MapperWithMapsideJoin extends
-  Mapper<LongWritable, Text, Text, Text> {
+public class MapperWithMapsideJoin extends Mapper<LongWritable, Text, Text, Text> {
 
   private Hashtable<String, String> joinMap = new Hashtable<String, String>();
 
@@ -38,7 +38,7 @@ public class MapperWithMapsideJoin extends
           br.close();
         }
       } else {
-        System.out.println("### cache files is null!");
+        System.out.println("cache files is null!");
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -48,15 +48,8 @@ public class MapperWithMapsideJoin extends
   public void map(LongWritable key, Text value, Context context)
     throws IOException, InterruptedException {
 
-    // 콤마 구분자 분리
-    String[] colums = value.toString().split(",");
-    if (colums != null && colums.length > 0) {
-      try {
-        outputKey.set(joinMap.get(colums[8]));
-        context.write(outputKey, value);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
+    AirlinePerformanceParser parser = new AirlinePerformanceParser(value);
+    outputKey.set(joinMap.get(parser.getUniqueCarrier()));
+    context.write(outputKey, value);
   }
 }

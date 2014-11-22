@@ -17,9 +17,8 @@ import org.apache.hadoop.util.ToolRunner;
 public class SearchValueList extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
-    int res = ToolRunner.run(new Configuration(), new SearchValueList(),
-      args);
-    System.out.println("## RESULT:" + res);
+    int res = ToolRunner.run(new Configuration(), new SearchValueList(), args);
+    System.out.println("MR-Job Result:" + res);
   }
 
   public int run(String[] args) throws Exception {

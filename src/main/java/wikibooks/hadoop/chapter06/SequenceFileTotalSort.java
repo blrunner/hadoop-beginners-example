@@ -19,9 +19,8 @@ import java.net.URI;
 public class SequenceFileTotalSort extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
-    int res = ToolRunner.run(new Configuration(),
-      new SequenceFileTotalSort(), args);
-    System.out.println("## RESULT:" + res);
+    int res = ToolRunner.run(new Configuration(), new SequenceFileTotalSort(), args);
+    System.out.println("MR-Job Result:" + res);
   }
 
   public int run(String[] args) throws Exception {
@@ -35,10 +34,8 @@ public class SequenceFileTotalSort extends Configured implements Tool {
 
     // SequenceFile 압축 포맷 설정
     SequenceFileOutputFormat.setCompressOutput(conf, true);
-    SequenceFileOutputFormat
-      .setOutputCompressorClass(conf, GzipCodec.class);
-    SequenceFileOutputFormat.setOutputCompressionType(conf,
-      CompressionType.BLOCK);
+    SequenceFileOutputFormat.setOutputCompressorClass(conf, GzipCodec.class);
+    SequenceFileOutputFormat.setOutputCompressionType(conf, CompressionType.BLOCK);
 
     // 입출력 경로 설정
     FileInputFormat.setInputPaths(conf, new Path(args[0]));

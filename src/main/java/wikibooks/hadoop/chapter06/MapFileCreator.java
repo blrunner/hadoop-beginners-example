@@ -13,9 +13,8 @@ import org.apache.hadoop.util.ToolRunner;
 public class MapFileCreator extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
-    int res = ToolRunner.run(new Configuration(), new MapFileCreator(),
-      args);
-    System.out.println("## RESULT:" + res);
+    int res = ToolRunner.run(new Configuration(), new MapFileCreator(), args);
+    System.out.println("MR-Job Result:" + res);
   }
 
   public int run(String[] args) throws Exception {
@@ -35,10 +34,8 @@ public class MapFileCreator extends Configured implements Tool {
 
     // 시퀀스 파일 압축 포맷 설정
     SequenceFileOutputFormat.setCompressOutput(conf, true);
-    SequenceFileOutputFormat
-      .setOutputCompressorClass(conf, GzipCodec.class);
-    SequenceFileOutputFormat.setOutputCompressionType(conf,
-      CompressionType.BLOCK);
+    SequenceFileOutputFormat.setOutputCompressorClass(conf, GzipCodec.class);
+    SequenceFileOutputFormat.setOutputCompressionType(conf, CompressionType.BLOCK);
 
     JobClient.runJob(conf);
 

@@ -19,7 +19,7 @@ public class MapsideJoin extends Configured implements Tool {
   public static void main(String[] args) throws Exception {
     // Tool 인터페이스 실행
     int res = ToolRunner.run(new Configuration(), new MapsideJoin(), args);
-    System.out.println("## RESULT:" + res);
+    System.out.println("MR-Job Result:" + res);
   }
 
   public int run(String[] args) throws Exception {

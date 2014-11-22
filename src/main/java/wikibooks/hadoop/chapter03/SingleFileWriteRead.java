@@ -35,7 +35,7 @@ public class SingleFileWriteRead {
       String inputString = inputStream.readUTF();
       inputStream.close();
 
-      System.out.println("## inputString:" + inputString);
+      System.out.println("Input Data:" + inputString);
 
     } catch (Exception e) {
       e.printStackTrace();

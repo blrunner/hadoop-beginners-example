@@ -48,10 +48,8 @@ public class ArrivalDelayCountWithSnappy {
 
     //시퀀스 파일 설정
     SequenceFileOutputFormat.setCompressOutput(job, true);
-    SequenceFileOutputFormat.setOutputCompressorClass(job,
-      SnappyCodec.class);
-    SequenceFileOutputFormat.setOutputCompressionType(job,
-      CompressionType.BLOCK);
+    SequenceFileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
+    SequenceFileOutputFormat.setOutputCompressionType(job, CompressionType.BLOCK);
 
     //출력키 및 출력값 유형 설정
     job.setOutputKeyClass(Text.class);
