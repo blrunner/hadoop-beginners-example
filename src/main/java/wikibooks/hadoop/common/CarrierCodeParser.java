@@ -7,8 +7,12 @@ public class CarrierCodeParser {
   private String carrierName;
 
   public CarrierCodeParser(Text value) {
+    this(value.toString());
+  }
+
+  public CarrierCodeParser(String value) {
     try {
-      String[] colums = value.toString().split(",");
+      String[] colums = value.split(",");
       if (colums != null && colums.length > 0) {
         carrierCode = colums[0];
         carrierName = colums[1];

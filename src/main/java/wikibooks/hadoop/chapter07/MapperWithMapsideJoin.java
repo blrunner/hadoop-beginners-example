@@ -6,6 +6,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import wikibooks.hadoop.common.AirlinePerformanceParser;
+import wikibooks.hadoop.common.CarrierCodeParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,12 +28,11 @@ public class MapperWithMapSideJoin extends Mapper<LongWritable, Text, Text, Text
       // 조인 데이터 생성
       if (cacheFiles != null && cacheFiles.length > 0) {
         String line;
-        String[] tokens;
         BufferedReader br = new BufferedReader(new FileReader(cacheFiles[0].toString()));
         try {
           while ((line = br.readLine()) != null) {
-            tokens = line.toString().split(",");
-            joinMap.put(tokens[0], tokens[1]);
+            CarrierCodeParser codeParser = new CarrierCodeParser(line);
+            joinMap.put(codeParser.getCarrierCode(), codeParser.getCarrierName());
           }
         } finally {
           br.close();
@@ -49,7 +49,7 @@ public class MapperWithMapSideJoin extends Mapper<LongWritable, Text, Text, Text
     throws IOException, InterruptedException {
 
     AirlinePerformanceParser parser = new AirlinePerformanceParser(value);
-    outputKey.set(joinMap.get(parser.getUniqueCarrier()));
-    context.write(outputKey, value);
+    outputKey.set(parser.getUniqueCarrier());
+    context.write(outputKey, new Text(joinMap.get(parser.getUniqueCarrier()) + "\t" + value.toString()));
   }
 }

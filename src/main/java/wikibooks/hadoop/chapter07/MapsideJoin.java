@@ -14,11 +14,11 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class MapsideJoin extends Configured implements Tool {
+public class MapSideJoin extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
     // Tool 인터페이스 실행
-    int res = ToolRunner.run(new Configuration(), new MapsideJoin(), args);
+    int res = ToolRunner.run(new Configuration(), new MapSideJoin(), args);
     System.out.println("MR-Job Result:" + res);
   }
 
@@ -41,7 +41,7 @@ public class MapsideJoin extends Configured implements Tool {
     FileOutputFormat.setOutputPath(job, new Path(otherArgs[2]));
 
     // Job 클래스 설정
-    job.setJarByClass(MapsideJoin.class);
+    job.setJarByClass(MapSideJoin.class);
     // Mapper 설정
     job.setMapperClass(MapperWithMapSideJoin.class);
     // Reducer 설정

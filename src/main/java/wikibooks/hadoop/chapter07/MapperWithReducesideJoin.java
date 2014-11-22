@@ -7,7 +7,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import wikibooks.hadoop.common.AirlinePerformanceParser;
 
-public class MapperWithReducesideJoin extends
+public class MapperWithReduceSideJoin extends
   Mapper<LongWritable, Text, TaggedKey, Text> {
 
   public void map(LongWritable key, Text value, Context context)

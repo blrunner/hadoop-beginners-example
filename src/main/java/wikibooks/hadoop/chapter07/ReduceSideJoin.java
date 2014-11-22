@@ -60,7 +60,7 @@ public class ReduceSideJoin extends Configured implements Tool {
     MultipleInputs.addInputPath(job, new Path(otherArgs[0]),
       TextInputFormat.class, CarrierCodeMapper.class);
     MultipleInputs.addInputPath(job, new Path(otherArgs[1]),
-      TextInputFormat.class, MapperWithReducesideJoin.class);
+      TextInputFormat.class, MapperWithReduceSideJoin.class);
 
     job.waitForCompletion(true);
 
