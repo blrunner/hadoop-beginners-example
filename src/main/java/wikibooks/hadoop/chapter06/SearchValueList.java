@@ -38,8 +38,7 @@ public class SearchValueList extends Configured implements Tool {
 
     // 파티셔너를 이용해 검색 키가 저장된 MapFile 조회
     Partitioner<IntWritable, Text> partitioner = new HashPartitioner<IntWritable, Text>();
-    Reader reader = readers[partitioner.getPartition(key, value,
-      readers.length)];
+    Reader reader = readers[partitioner.getPartition(key, value, readers.length)];
 
     // 검색 결과 확인
     Writable entry = reader.get(key, value);

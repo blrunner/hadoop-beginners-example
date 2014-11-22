@@ -23,18 +23,15 @@ public class MapperWithMapsideJoin extends
   public void setup(Context context) throws IOException, InterruptedException {
     try {
       // 분산캐시 조회
-      Path[] cacheFiles = DistributedCache.getLocalCacheFiles(context
-        .getConfiguration());
+      Path[] cacheFiles = DistributedCache.getLocalCacheFiles(context.getConfiguration());
       // 조인 데이터 생성
       if (cacheFiles != null && cacheFiles.length > 0) {
         String line;
         String[] tokens;
-        BufferedReader br = new BufferedReader(new FileReader(
-          cacheFiles[0].toString()));
+        BufferedReader br = new BufferedReader(new FileReader(cacheFiles[0].toString()));
         try {
           while ((line = br.readLine()) != null) {
-            tokens = line.toString().replaceAll("\"", "")
-              .split(",");
+            tokens = line.toString().split(",");
             joinMap.put(tokens[0], tokens[1]);
           }
         } finally {
@@ -51,16 +48,14 @@ public class MapperWithMapsideJoin extends
   public void map(LongWritable key, Text value, Context context)
     throws IOException, InterruptedException {
 
-    if (key.get() > 0) {
-      // 콤마 구분자 분리
-      String[] colums = value.toString().split(",");
-      if (colums != null && colums.length > 0) {
-        try {
-          outputKey.set(joinMap.get(colums[8]));
-          context.write(outputKey, value);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    // 콤마 구분자 분리
+    String[] colums = value.toString().split(",");
+    if (colums != null && colums.length > 0) {
+      try {
+        outputKey.set(joinMap.get(colums[8]));
+        context.write(outputKey, value);
+      } catch (Exception e) {
+        e.printStackTrace();
       }
     }
   }

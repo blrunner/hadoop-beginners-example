@@ -18,14 +18,12 @@ public class DelayCountWithDateKey extends Configured implements Tool {
 
   public static void main(String[] args) throws Exception {
     // Tool 인터페이스 실행
-    int res = ToolRunner.run(new Configuration(),
-      new DelayCountWithDateKey(), args);
+    int res = ToolRunner.run(new Configuration(), new DelayCountWithDateKey(), args);
     System.out.println("## RESULT:" + res);
   }
 
   public int run(String[] args) throws Exception {
-    String[] otherArgs = new GenericOptionsParser(getConf(), args)
-      .getRemainingArgs();
+    String[] otherArgs = new GenericOptionsParser(getConf(), args).getRemainingArgs();
 
     // 입출력 데이터 경로 확인
     if (otherArgs.length != 2) {

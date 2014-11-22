@@ -32,7 +32,7 @@ public class ArrivalDelayCount {
     // Reducer 클래스 설정
     job.setReducerClass(DelayCountReducer.class);
 
-    // 입출력 데이터 포맷 설정�
+    // 입출력 데이터 포맷 설정
     job.setInputFormatClass(TextInputFormat.class);
     job.setOutputFormatClass(TextOutputFormat.class);
 
@@ -42,6 +42,4 @@ public class ArrivalDelayCount {
 
     job.waitForCompletion(true);
   }
-
-
 }

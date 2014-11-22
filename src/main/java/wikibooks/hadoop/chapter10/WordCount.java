@@ -25,8 +25,7 @@ public class WordCount extends Configured implements Tool {
   }
 
   public int run(String[] args) throws Exception {
-    String[] otherArgs = new GenericOptionsParser(getConf(), args)
-      .getRemainingArgs();
+    String[] otherArgs = new GenericOptionsParser(getConf(), args).getRemainingArgs();
 
     // 입출력 데이터 경로 확인
     if (otherArgs.length != 2) {

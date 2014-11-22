@@ -60,25 +60,23 @@ public class SequenceFileCreator extends Configured implements Tool {
     public void map(LongWritable key, Text value,
                     OutputCollector<IntWritable, Text> output, Reporter reporter)
       throws IOException {
-      if (key.get() > 0) {
-        try {
-          String[] colums = value.toString().split(",");
-          if (colums.length > 0) {
-            if (!colums[18].equals("NA") && !colums[18].equals("")) {
-              distance = Integer.parseInt(colums[18]);
-            }
-            outputKey.set(distance);
-            output.collect(outputKey, value);
+      try {
+        String[] colums = value.toString().split(",");
+        if (colums.length > 0) {
+          if (!colums[18].equals("NA") && !colums[18].equals("")) {
+            distance = Integer.parseInt(colums[18]);
           }
-        } catch (ArrayIndexOutOfBoundsException ae) {
-          outputKey.set(0);
+          outputKey.set(distance);
           output.collect(outputKey, value);
-          ae.printStackTrace();
-        } catch (Exception e) {
-          outputKey.set(0);
-          output.collect(outputKey, value);
-          e.printStackTrace();
         }
+      } catch (ArrayIndexOutOfBoundsException ae) {
+        outputKey.set(0);
+        output.collect(outputKey, value);
+        ae.printStackTrace();
+      } catch (Exception e) {
+        outputKey.set(0);
+        output.collect(outputKey, value);
+        e.printStackTrace();
       }
     }
   }

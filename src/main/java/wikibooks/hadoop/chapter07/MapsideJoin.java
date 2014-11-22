@@ -23,20 +23,18 @@ public class MapsideJoin extends Configured implements Tool {
   }
 
   public int run(String[] args) throws Exception {
-    String[] otherArgs = new GenericOptionsParser(getConf(), args)
-      .getRemainingArgs();
+    String[] otherArgs = new GenericOptionsParser(getConf(), args).getRemainingArgs();
     // 입출력 데이터 경로 확인
     if (otherArgs.length != 3) {
       System.err.println("Usage: MapsideJoin <metadata> <in> <out>");
       System.exit(2);
     }
 
-    // Job 이름 설정
+    // Job 이름 설정T
     Job job = new Job(getConf(), "MapsideJoin");
 
     // 분산 캐시 설정
-    DistributedCache.addCacheFile(new Path(otherArgs[0]).toUri(),
-      job.getConfiguration());
+    DistributedCache.addCacheFile(new Path(otherArgs[0]).toUri(), job.getConfiguration());
 
     // 입출력 데이터 경로 설정
     FileInputFormat.addInputPath(job, new Path(otherArgs[1]));
