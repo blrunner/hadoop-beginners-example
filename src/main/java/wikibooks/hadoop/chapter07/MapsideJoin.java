@@ -26,7 +26,7 @@ public class MapsideJoin extends Configured implements Tool {
     String[] otherArgs = new GenericOptionsParser(getConf(), args).getRemainingArgs();
     // 입출력 데이터 경로 확인
     if (otherArgs.length != 3) {
-      System.err.println("Usage: MapsideJoin <metadata> <in> <out>");
+      System.err.println("Usage: MapSideJoin <metadata> <in> <out>");
       System.exit(2);
     }
 
@@ -43,7 +43,7 @@ public class MapsideJoin extends Configured implements Tool {
     // Job 클래스 설정
     job.setJarByClass(MapsideJoin.class);
     // Mapper 설정
-    job.setMapperClass(MapperWithMapsideJoin.class);
+    job.setMapperClass(MapperWithMapSideJoin.class);
     // Reducer 설정
     job.setNumReduceTasks(0);
 

@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class MapperWithMapsideJoin extends Mapper<LongWritable, Text, Text, Text> {
+public class MapperWithMapSideJoin extends Mapper<LongWritable, Text, Text, Text> {
 
   private Hashtable<String, String> joinMap = new Hashtable<String, String>();
 
