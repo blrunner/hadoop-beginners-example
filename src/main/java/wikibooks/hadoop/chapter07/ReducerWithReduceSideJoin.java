@@ -7,7 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class ReducerWithReduceSideJoin extends Reducer<TaggedKey, Text, Text, Text> {
-
   // 출력키
   private Text outputKey = new Text();
   // 출력값
@@ -26,6 +25,5 @@ public class ReducerWithReduceSideJoin extends Reducer<TaggedKey, Text, Text, Te
       outputValue = new Text(carrierName.toString() + "\t" + record.toString());
       context.write(outputKey, outputValue);
     }
-
   }
 }

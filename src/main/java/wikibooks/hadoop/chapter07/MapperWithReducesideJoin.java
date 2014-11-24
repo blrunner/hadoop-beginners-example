@@ -10,10 +10,14 @@ import wikibooks.hadoop.common.AirlinePerformanceParser;
 public class MapperWithReduceSideJoin extends
   Mapper<LongWritable, Text, TaggedKey, Text> {
 
+  TaggedKey outputKey = new TaggedKey();
+
   public void map(LongWritable key, Text value, Context context)
     throws IOException, InterruptedException {
 
     AirlinePerformanceParser parser = new AirlinePerformanceParser(value);
-    context.write(new TaggedKey(parser.getUniqueCarrier(), 1), value);
+    outputKey.setCarrierCode(parser.getUniqueCarrier());
+    outputKey.setTag(1);
+    context.write(outputKey, value);
   }
 }

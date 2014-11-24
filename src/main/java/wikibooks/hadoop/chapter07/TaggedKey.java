@@ -28,6 +28,14 @@ public class TaggedKey implements WritableComparable<TaggedKey> {
     return tag;
   }
 
+  public void setCarrierCode(String carrierCode) {
+    this.carrierCode = carrierCode;
+  }
+
+  public void setTag(Integer tag) {
+    this.tag = tag;
+  }
+
   @Override
   public int compareTo(TaggedKey key) {
     int result = this.carrierCode.compareTo(key.carrierCode);
