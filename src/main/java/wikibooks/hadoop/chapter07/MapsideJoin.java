@@ -31,7 +31,7 @@ public class MapSideJoin extends Configured implements Tool {
     }
 
     // Job 이름 설정T
-    Job job = new Job(getConf(), "MapsideJoin");
+    Job job = new Job(getConf(), "MapSideJoin");
 
     // 분산 캐시 설정
     DistributedCache.addCacheFile(new Path(otherArgs[0]).toUri(), job.getConfiguration());
