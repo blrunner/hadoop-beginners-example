@@ -36,6 +36,13 @@
       <artifactId>hadoop-client</artifactId>
       <version>${hadoop.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.mrunit</groupId>
+      <artifactId>mrunit</artifactId>
+      <version>0.8.0-incubating</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
 <!--
