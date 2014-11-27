@@ -27,7 +27,7 @@ public class WordCountTest {
   public void setUp() {
     WordCountMapper mapper = new WordCountMapper();
     WordCountReducer reducer = new WordCountReducer();
-    mapDriver = MapDriver.newMapDriver(mapper);;
+    mapDriver = MapDriver.newMapDriver(mapper);
     reduceDriver = ReduceDriver.newReduceDriver(reducer);
     mapReduceDriver = MapReduceDriver.newMapReduceDriver(mapper, reducer);
   }
